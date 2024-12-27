@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Card</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card {
+      margin: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      transition: opacity 0.2s;
+    }
+
+    .card:hover .card-img-top {
+      opacity: 0.8;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .btn-primary {
+      margin-right: 5px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include("../partials/navbar.ejs") -%>
+    <div class="container">
+      <div class="row">
+        <% show.map((val)=> {%>
+        <div class="col-md-4">
+            <div class="card">
+              <img src="<%= val.image %>" class="card-img-top" alt="Blog Image">
+              <div class="card-body">
+                <h5 class="card-title"><%= val.title %></h5>
+                <p class="card-text"><%= val.author %></p>
+                <p class="card-text"><%= val.dsc %></p>
+              </div>
+              <div class="card-footer">
+                <a href="/editPage?id=<%= val._id %>"><button class="btn btn-primary" type="button">Edit</button></a>
+                <a href="/delete?id=<%= val._id %>"><button class="btn btn-primary" type="button">Delete</button></a>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
